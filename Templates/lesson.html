@@ -25,7 +25,7 @@
     {% for response in order %}
     {% for response_follow in responses_follow %}
     {% if response_follow[1] == response %}
-    <li class="list-group-item">{{response_follow[1]}} : {{response_follow[0]}}</li>
+    <li class="list-group-item {{color[response]}}">{{response_follow[1]}} : {{response_follow[0]}}</li>
     {% endif %}
     {% endfor %}
     {% endfor %}
@@ -38,7 +38,7 @@
     {% for response in order %}
     {% for response_complete in responses_complete %}
     {% if response_complete[1] == response %}
-    <li class="list-group-item">{{response_complete[1]}} : {{response_complete[0]}}</li>
+    <li class="list-group-item {{color[response]}}">{{response_complete[1]}} : {{response_complete[0]}}</li>
     {% endif %}
     {% endfor %}
     {% endfor %}
@@ -51,7 +51,7 @@
     {% for response in order %}
     {% for response_pace in responses_pace %}
     {% if response_pace[1] == response %}
-    <li class="list-group-item">{{response_pace[1]}} : {{response_pace[0]}}</li>
+    <li class="list-group-item {{color[response]}}">{{response_pace[1]}} : {{response_pace[0]}}</li>
     {% endif %}
     {% endfor %}
     {% endfor %}
@@ -63,7 +63,7 @@
   <h3>Were there any problems you'd like to highlight? This may be shared, without identifying you:</h3>
   <ul class="list-group">
     {% for response_problems in responses_problems %}
-    <li class="list-group-item"><h5 class="mb-1">Index: {{response_problems["student_index"]}}</h5>{{response_problems["problems"]}}</li>
+    <li class="list-group-item list-group-item-secondary"><h5 class="mb-1">Index: {{response_problems["student_index"]}}</h5>{{response_problems["problems"]}}</li>
     {% endfor %}
   </ul>
 </div>
@@ -72,7 +72,7 @@
   <h3>Additional Question:</h3>
   <ul class="list-group">
     {% for response_additional in responses_additional %}
-    <li class="list-group-item"><h5 class="mb-1">Index: {{response_additional["student_index"]}}</h5>{{response_additional["additional_qn"]}}</li>
+    <li class="list-group-item list-group-item-secondary"><h5 class="mb-1">Index: {{response_additional["student_index"]}}</h5>{{response_additional["additional_qn"]}}</li>
     {% endfor %}
   </ul>
 </div>
