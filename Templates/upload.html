@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Upload CSV file</h1>
+    <p class="lead">Uploaded file will update database</p>
+    <form class=""  method="post" enctype=multipart/form-data>
+    <input type="file" name="file" value="">
+    <input type="submit" name="Submit" value="Submit">
+    </form>
+  </div>
+</div>
+
+{% endblock %}

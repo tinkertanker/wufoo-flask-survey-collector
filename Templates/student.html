@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+  <div class="container-fluid">
+    <h2 class="display-4">Choose Student Index:</h2>
+    <form method="post">
+      <select name="student_selected">
+        {% for i in range(1,59) %}
+        <option value="{{i}}">{{i}}</option>
+        {% endfor %}
+      </select>
+      <input type="submit" name="Submit" value="Submit">
+    </form>
+    <br>
+    <p class="lead">Student Index: {{student_selected}}</p>
+    <p class="lead">Lessons Attended: {{attendance}}</p>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <h3>I managed to follow what was taught:</h3>
+  <ul class="list-group">
+    {% for response_follow in responses_follow %}
+    <li class="list-group-item"><h5 class="mb-1">Week: {{response_follow["survey"]}}</h5>{{response_follow["ability_follow"]}}</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="container-fluid">
+  <h3>I managed to complete the work that was given:</h3>
+  <ul class="list-group">
+    {% for response_complete in responses_complete %}
+    <li class="list-group-item"><h5 class="mb-1">Week: {{response_complete["survey"]}}</h5>{{response_complete["ability_complete"]}}</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="container-fluid">
+  <h3>The pace was suitable for me:</h3>
+  <ul class="list-group">
+    {% for response_pace in responses_pace %}
+    <li class="list-group-item"><h5 class="mb-1">Week: {{response_pace["survey"]}}</h5>{{response_pace["pace"]}}</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="container-fluid">
+  <h3>Were there any problems you'd like to highlight? This may be shared, without identifying you:</h3>
+  <ul class="list-group">
+    {% for response_problems in responses_problems %}
+    <li class="list-group-item"><h5 class="mb-1">Week: {{response_problems["survey"]}}</h5>{{response_problems["problems"]}}</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="container-fluid">
+  <h3>Additional Question:</h3>
+  <ul class="list-group">
+    {% for response_additional in responses_additional %}
+    <li class="list-group-item"><h5 class="mb-1">Week: {{response_additional["survey"]}}</h5>{{response_additional["additional_qn"]}}</li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}

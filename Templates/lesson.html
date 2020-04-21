@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+  <div class="container-fluid">
+    <h2 class="display-4">Choose Lesson:</h2>
+    <form method="post">
+      <select name="survey_lesson">
+        {% for survey in surveys %}
+        <option value="{{survey['survey']}}">{{survey["survey"]}}</option>
+        {% endfor %}
+      </select>
+      <input type="submit" name="Submit" value="Submit">
+    </form>
+    <br>
+    <p class="lead">Lesson: {{survey_lesson}}</p>
+  </div>
+</div>
+
+<br>
+
+<div class="container-fluid">
+  <h3>I managed to follow what was taught:</h3>
+  <ul class="list-group">
+    {% for response_follow in responses_follow %}
+    <li class="list-group-item">{{response_follow[1]}} : {{response_follow[0]}}</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="container-fluid">
+  <h3>I managed to complete the work that was given:</h3>
+  <ul class="list-group">
+    {% for response_complete in responses_complete %}
+    <li class="list-group-item">{{response_complete[1]}} : {{response_complete[0]}}</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="container-fluid">
+  <h3>The pace was suitable for me:</h3>
+  <ul class="list-group">
+    {% for response_pace in responses_pace %}
+    <li class="list-group-item">{{response_pace[1]}} : {{response_pace[0]}}</li>
+    {% endfor %}
+  </ul>
+</div>
+
+
+<div class="container-fluid">
+  <h3>Were there any problems you'd like to highlight? This may be shared, without identifying you:</h3>
+  <ul class="list-group">
+    {% for response_problems in responses_problems %}
+    <li class="list-group-item"><h5 class="mb-1">Index: {{response_problems["student_index"]}}</h5>{{response_problems["problems"]}}</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="container-fluid">
+  <h3>Additional Question:</h3>
+  <ul class="list-group">
+    {% for response_additional in responses_additional %}
+    <li class="list-group-item"><h5 class="mb-1">Index: {{response_additional["student_index"]}}</h5>{{response_additional["additional_qn"]}}</li>
+    {% endfor %}
+  </ul>
+</div>
+
+
+{% endblock %}
