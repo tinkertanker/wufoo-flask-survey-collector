@@ -22,8 +22,12 @@
 <div class="container-fluid">
   <h3>I managed to follow what was taught:</h3>
   <ul class="list-group">
+    {% for response in order %}
     {% for response_follow in responses_follow %}
+    {% if response_follow[1] == response %}
     <li class="list-group-item">{{response_follow[1]}} : {{response_follow[0]}}</li>
+    {% endif %}
+    {% endfor %}
     {% endfor %}
   </ul>
 </div>
@@ -31,8 +35,12 @@
 <div class="container-fluid">
   <h3>I managed to complete the work that was given:</h3>
   <ul class="list-group">
+    {% for response in order %}
     {% for response_complete in responses_complete %}
+    {% if response_complete[1] == response %}
     <li class="list-group-item">{{response_complete[1]}} : {{response_complete[0]}}</li>
+    {% endif %}
+    {% endfor %}
     {% endfor %}
   </ul>
 </div>
@@ -40,8 +48,12 @@
 <div class="container-fluid">
   <h3>The pace was suitable for me:</h3>
   <ul class="list-group">
+    {% for response in order %}
     {% for response_pace in responses_pace %}
+    {% if response_pace[1] == response %}
     <li class="list-group-item">{{response_pace[1]}} : {{response_pace[0]}}</li>
+    {% endif %}
+    {% endfor %}
     {% endfor %}
   </ul>
 </div>

@@ -34,6 +34,7 @@ def create_db():
 if not os.path.isfile('db.sqlite3'):
     create_db()
 
+order = ["Strongly Disgree","Disagree","Neutral","Agree","Strongly Agree"]
 
 @app.route("/")
 def home():
@@ -63,7 +64,7 @@ def lesson_page():
         cursor = db.execute("SELECT additional_qn,student_index FROM surveys WHERE survey = ?",(survey_lesson,))
         responses_additional = cursor.fetchall()
         db.close()
-        return render_template("lesson.html", surveys=surveys, survey_lesson=survey_lesson, responses_follow=responses_follow, responses_complete=responses_complete, responses_pace=responses_pace, responses_problems=responses_problems, responses_additional=responses_additional)
+        return render_template("lesson.html", surveys=surveys, order=order, survey_lesson=survey_lesson, responses_follow=responses_follow, responses_complete=responses_complete, responses_pace=responses_pace, responses_problems=responses_problems, responses_additional=responses_additional)
     return render_template("lesson.html", surveys=surveys)
 
 @app.route("/student", methods=["GET","POST"])
