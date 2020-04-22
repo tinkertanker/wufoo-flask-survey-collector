@@ -142,7 +142,7 @@ def student_page():
         cursor = db.execute("SELECT additional_qn,survey FROM surveys WHERE student_index = ?",(student_selected,))
         responses_additional = cursor.fetchall()
         db.close()
-        return render_template("student.html",student_selected=student_selected,attendance=attendance, responses_follow=responses_follow, responses_complete=responses_complete, responses_pace=responses_pace, responses_problems=responses_problems, responses_additional=responses_additional)
+        return render_template("student.html",color=color,student_selected=student_selected,attendance=attendance, responses_follow=responses_follow, responses_complete=responses_complete, responses_pace=responses_pace, responses_problems=responses_problems, responses_additional=responses_additional)
     return render_template("student.html")
 
 @app.route("/upload", methods=["GET","POST"])
