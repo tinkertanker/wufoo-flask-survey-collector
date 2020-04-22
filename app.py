@@ -52,7 +52,7 @@ class User(UserMixin):
         self.username = username
         self.password = password
 
-users = [User("tinkertanker","hotchocolate1")]
+users = [User("username","password")]
 
 @login_manager.user_loader
 def load_user(user_id):
