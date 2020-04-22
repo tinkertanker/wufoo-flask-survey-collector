@@ -63,7 +63,11 @@
   <h3>Were there any problems you'd like to highlight? This may be shared, without identifying you:</h3>
   <ul class="list-group">
     {% for response_problems in responses_problems %}
+    {% if current_user.is_authenticated %}
     <li class="list-group-item list-group-item-secondary"><h5 class="mb-1">Index: {{response_problems["student_index"]}}</h5>{{response_problems["problems"]}}</li>
+    {% else %}
+    <li class="list-group-item list-group-item-secondary">{{response_problems["problems"]}}</li>
+    {% endif %}
     {% endfor %}
   </ul>
 </div>
@@ -72,7 +76,11 @@
   <h3>Additional Question:</h3>
   <ul class="list-group">
     {% for response_additional in responses_additional %}
+    {% if current_user.is_authenticated %}
     <li class="list-group-item list-group-item-secondary"><h5 class="mb-1">Index: {{response_additional["student_index"]}}</h5>{{response_additional["additional_qn"]}}</li>
+    {% else %}
+    <li class="list-group-item list-group-item-secondary">{{response_additional["additional_qn"]}}</li>
+    {% endif %}
     {% endfor %}
   </ul>
 </div>
