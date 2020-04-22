@@ -5,15 +5,15 @@
   <div class="container-fluid">
     <h2 class="display-4">Choose Lesson:</h2>
     <form method="post">
-      <select name="survey_lesson">
-        {% for survey in surveys %}
-        <option value="{{survey['survey']}}">{{survey["survey"]}}</option>
+      <select name="lesson_number">
+        {% for i in range(1,37) %}
+        <option value="{{i}}">{{i}}</option>
         {% endfor %}
       </select>
       <input type="submit" name="Submit" value="Submit">
     </form>
     <br>
-    <p class="lead">Lesson: {{survey_lesson}}</p>
+    <p class="lead">Lesson: {{lesson_number}}</p>
   </div>
 </div>
 

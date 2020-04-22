@@ -97,12 +97,9 @@ def logout():
 
 @app.route("/lesson", methods=["GET","POST"])
 def lesson_page():
-    db = get_db()
-    cursor = db.execute("SELECT DISTINCT survey FROM surveys")
-    surveys = cursor.fetchall()
-    db.close()
     if request.method == "POST":
-        survey_lesson = request.form.get("survey_lesson")
+        lesson_number = request.form.get("lesson_number")
+        survey_lesson = "swift-accelerator-2020-"+str(lesson_number)+"-attendance-exit-survey_entries"
         db = get_db()
         cursor = db.execute("SELECT COUNT(ability_follow),ability_follow FROM surveys WHERE survey = ? GROUP BY ability_follow",(survey_lesson,))
         responses_follow = cursor.fetchall()
@@ -119,8 +116,8 @@ def lesson_page():
         cursor = db.execute("SELECT additional_qn,student_index FROM surveys WHERE survey = ?",(survey_lesson,))
         responses_additional = cursor.fetchall()
         db.close()
-        return render_template("lesson.html", surveys=surveys, order=order,color=color, survey_lesson=survey_lesson, responses_follow=responses_follow, responses_complete=responses_complete, responses_pace=responses_pace, responses_problems=responses_problems, responses_additional=responses_additional)
-    return render_template("lesson.html", surveys=surveys)
+        return render_template("lesson.html", lesson_number=lesson_number, order=order,color=color, survey_lesson=survey_lesson, responses_follow=responses_follow, responses_complete=responses_complete, responses_pace=responses_pace, responses_problems=responses_problems, responses_additional=responses_additional)
+    return render_template("lesson.html")
 
 @app.route("/student", methods=["GET","POST"])
 @login_required
