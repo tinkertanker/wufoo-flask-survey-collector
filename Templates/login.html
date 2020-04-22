@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Login</h1>
+    <p class="lead">Compiled data for exit survey by lesson and student</p>
+    <form method="post">
+      <label for="username">Username:</label><br>
+      <input type="text" id="username" name="username"><br>
+      <label for="pwd">Password:</label><br>
+      <input type="password" id="pwd" name="pwd">
+      <input type="submit" name="Submit" value="Submit">
+    </form>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,14 +1,20 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, flash
 import sqlite3
 import os
 import pandas as pd
 from werkzeug.utils import secure_filename
 from flask_restful import Resource, Api
+from flask_login import LoginManager,login_required,login_user,logout_user,UserMixin
+
 
 app = Flask(__name__, template_folder='Templates')
 app.config["SECRET_KEY"] = "mysecretkey"
 
 api = Api(app)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "login"
 
 def get_db():
     db = sqlite3.connect("db.sqlite3")
@@ -41,9 +47,53 @@ color = {"Strongly Disgree":"bg-danger",
         "Agree":"list-group-item-success",
         "Strongly Agree":"bg-success"}
 
+class User(UserMixin):
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+
+users = [User("tinkertanker","hotchocolate1")]
+
+@login_manager.user_loader
+def load_user(user_id):
+    for user in users:
+        if user.username == user_id:
+            user_object = user
+            return user_object
+            break
+        else:
+            user_object = None
+            return user_object
+
 @app.route("/")
 def home():
     return render_template("home.html")
+
+@app.route("/login", methods=["GET","POST"])
+def login():
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("pwd")
+        for user in users:
+            if user.username == username and user.password == password:
+                user.id = username
+                login_user(user)
+                flash("Logged in successfully")
+
+                next = request.args.get("next")
+
+                if next == None or not next[0]=="/":
+                    next = url_for("home")
+
+                return redirect(next)
+
+    return render_template("login.html")
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("home"))
 
 @app.route("/lesson", methods=["GET","POST"])
 def lesson_page():
@@ -73,6 +123,7 @@ def lesson_page():
     return render_template("lesson.html", surveys=surveys)
 
 @app.route("/student", methods=["GET","POST"])
+@login_required
 def student_page():
     if request.method == "POST":
         student_selected = request.form.get("student_selected")
