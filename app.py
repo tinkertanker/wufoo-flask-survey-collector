@@ -118,8 +118,8 @@ def lesson_page():
         missing = []
         for i in range(1,59):
             cursor = db.execute("SELECT * FROM surveys WHERE survey = ? AND student_index = ?",(survey_lesson,i))
-            check = cursor.fetchone()
-            if check == None:
+            check = cursor.fetchall()
+            if check == []:
                 missing.append(i)
         db.close()
         return render_template("lesson.html", lesson_number=lesson_number, missing=missing, order=order,color=color, survey_lesson=survey_lesson, responses_follow=responses_follow, responses_complete=responses_complete, responses_pace=responses_pace, responses_problems=responses_problems, responses_additional=responses_additional)
