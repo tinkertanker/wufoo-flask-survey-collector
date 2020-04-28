@@ -152,6 +152,7 @@ def student_page():
     return render_template("student.html")
 
 @app.route("/upload", methods=["GET","POST"])
+@login_required
 def upload_page():
     if request.method == "POST":
         csv_file = request.files["file"]
@@ -172,6 +173,38 @@ def upload_page():
             db.close()
         return redirect(url_for("home"))
     return render_template("upload.html")
+
+@app.route("/table")
+@login_required
+def table_page():
+    db = get_db()
+    follow_table = []
+    for i in range(1,59):
+        temp_list = []
+        for j in range(5):
+            cursor = db.execute("SELECT COUNT(ability_follow) FROM surveys WHERE student_index=? AND ability_follow=?",(i,order[j]))
+            response_counts = cursor.fetchall()
+            temp_list.append(response_counts[0])
+        follow_table.append(temp_list)
+    complete_table = []
+    for i in range(1,59):
+        temp_list = []
+        for j in range(5):
+            cursor = db.execute("SELECT COUNT(ability_complete) FROM surveys WHERE student_index=? AND ability_complete=?",(i,order[j]))
+            response_counts = cursor.fetchall()
+            temp_list.append(response_counts[0])
+        complete_table.append(temp_list)
+    pace_table = []
+    for i in range(1,59):
+        temp_list = []
+        for j in range(5):
+            cursor = db.execute("SELECT COUNT(pace) FROM surveys WHERE student_index=? AND pace=?",(i,order[j]))
+            response_counts = cursor.fetchall()
+            temp_list.append(response_counts[0])
+        pace_table.append(temp_list)
+    db.close()
+    return render_template("table.html",follow_table=follow_table,complete_table=complete_table,pace_table=pace_table)
+
 
 class Webhook(Resource):
 

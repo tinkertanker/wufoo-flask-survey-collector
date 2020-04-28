@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="text-center">I managed to follow what was taught:</h3>
+
+<div class="container">
+  <div class="row row-cols-6">
+    <div class="col border">Student Index</div>
+    <div class="col border">Strongly Disagree</div>
+    <div class="col border">Disagree</div>
+    <div class="col border">Neutral</div>
+    <div class="col border">Agree</div>
+    <div class="col border">Strongly Agree</div>
+  </div>
+  {% for i in range(0,58) %}
+  <div class="row row-cols-6">
+    <div class="col border">{{i+1}}</div>
+    <div class="col border">{{follow_table[i][0][0]}}</div>
+    <div class="col border">{{follow_table[i][1][0]}}</div>
+    <div class="col border">{{follow_table[i][2][0]}}</div>
+    <div class="col border">{{follow_table[i][3][0]}}</div>
+    <div class="col border">{{follow_table[i][4][0]}}</div>
+  </div>
+  {% endfor %}
+</div>
+
+<br>
+
+<h3 class="text-center">I managed to complete the work that was given:</h3>
+
+<div class="container">
+  <div class="row row-cols-6">
+    <div class="col border">Student Index</div>
+    <div class="col border">Strongly Disagree</div>
+    <div class="col border">Disagree</div>
+    <div class="col border">Neutral</div>
+    <div class="col border">Agree</div>
+    <div class="col border">Strongly Agree</div>
+  </div>
+  {% for i in range(0,58) %}
+  <div class="row row-cols-6">
+    <div class="col border">{{i+1}}</div>
+    <div class="col border">{{complete_table[i][0][0]}}</div>
+    <div class="col border">{{complete_table[i][1][0]}}</div>
+    <div class="col border">{{complete_table[i][2][0]}}</div>
+    <div class="col border">{{complete_table[i][3][0]}}</div>
+    <div class="col border">{{complete_table[i][4][0]}}</div>
+  </div>
+  {% endfor %}
+</div>
+
+<br>
+
+<h3 class="text-center">The pace was suitable for me:</h3>
+
+<div class="container">
+  <div class="row row-cols-6">
+    <div class="col border">Student Index</div>
+    <div class="col border">Strongly Disagree</div>
+    <div class="col border">Disagree</div>
+    <div class="col border">Neutral</div>
+    <div class="col border">Agree</div>
+    <div class="col border">Strongly Agree</div>
+  </div>
+  {% for i in range(0,58) %}
+  <div class="row row-cols-6">
+    <div class="col border">{{i+1}}</div>
+    <div class="col border">{{pace_table[i][0][0]}}</div>
+    <div class="col border">{{pace_table[i][1][0]}}</div>
+    <div class="col border">{{pace_table[i][2][0]}}</div>
+    <div class="col border">{{pace_table[i][3][0]}}</div>
+    <div class="col border">{{pace_table[i][4][0]}}</div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
