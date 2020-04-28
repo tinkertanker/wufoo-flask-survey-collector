@@ -17,6 +17,7 @@
           <a class="nav-item nav-link" href="{{url_for('lesson_page')}}">Lesson</a>
           {% if current_user.is_authenticated %}
           <a class="nav-item nav-link" href="{{url_for('student_page')}}">Student</a>
+          <a class="nav-item nav-link" href="{{url_for('progress_page')}}">Progress</a>
           <a class="nav-item nav-link" href="{{url_for('table_page')}}">Table</a>
           <a class="nav-item nav-link" href="{{url_for('upload_page')}}">Upload</a>
           <a class="nav-item nav-link" href="{{url_for('logout')}}">Logout</a>

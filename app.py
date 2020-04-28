@@ -45,7 +45,8 @@ color = {"Strongly Disgree":"bg-danger",
         "Disagree":"list-group-item-danger",
         "Neutral":"list-group-item-secondary",
         "Agree":"list-group-item-success",
-        "Strongly Agree":"bg-success"}
+        "Strongly Agree":"bg-success",
+        "Nil":""}
 
 class User(UserMixin):
     def __init__(self, username, password):
@@ -205,6 +206,44 @@ def table_page():
     db.close()
     return render_template("table.html",follow_table=follow_table,complete_table=complete_table,pace_table=pace_table)
 
+@app.route("/progress")
+@login_required
+def progress_page():
+    db = get_db()
+    follow_progress = []
+    for i in range(1,59):
+        temp_list = []
+        for j in range(1,37):
+            cursor = db.execute("SELECT ability_follow FROM surveys WHERE student_index=? AND survey=?",(i,"swift-accelerator-2020-"+str(j)+"-attendance-exit-survey_entries"))
+            response = cursor.fetchone()
+            if response == None:
+                temp_list.append(["Nil"])
+            else:
+                temp_list.append(response)
+        follow_progress.append(temp_list)
+    complete_progress = []
+    for i in range(1,59):
+        temp_list = []
+        for j in range(1,37):
+            cursor = db.execute("SELECT ability_complete FROM surveys WHERE student_index=? AND survey=?",(i,"swift-accelerator-2020-"+str(j)+"-attendance-exit-survey_entries"))
+            response = cursor.fetchone()
+            if response == None:
+                temp_list.append(["Nil"])
+            else:
+                temp_list.append(response)
+        complete_progress.append(temp_list)
+    pace_progress = []
+    for i in range(1,59):
+        temp_list = []
+        for j in range(1,37):
+            cursor = db.execute("SELECT pace FROM surveys WHERE student_index=? AND survey=?",(i,"swift-accelerator-2020-"+str(j)+"-attendance-exit-survey_entries"))
+            response = cursor.fetchone()
+            if response == None:
+                temp_list.append(["Nil"])
+            else:
+                temp_list.append(response)
+        pace_progress.append(temp_list)
+    return render_template("progress.html", color=color, follow_progress=follow_progress, complete_progress=complete_progress, pace_progress=pace_progress)
 
 class Webhook(Resource):
 

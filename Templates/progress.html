@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="text-center">I managed to follow what was taught:</h3>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Student Index</th>
+      {% for i in range(1,37) %}
+      <th scope="col">{{i}}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in range(58) %}
+    <tr>
+      <th scope="row">{{i+1}}</th>
+      {% for j in range(36) %}
+      <td class="{{color[follow_progress[i][j][0]]}}">{{follow_progress[i][j][0]}}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<br>
+
+<h3 class="text-center">I managed to complete the work that was given:</h3>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Student Index</th>
+      {% for i in range(1,37) %}
+      <th scope="col">{{i}}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in range(58) %}
+    <tr>
+      <th scope="row">{{i+1}}</th>
+      {% for j in range(36) %}
+      <td class="{{color[complete_progress[i][j][0]]}}">{{complete_progress[i][j][0]}}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<br>
+
+<h3 class="text-center">The pace was suitable for me:</h3>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Student Index</th>
+      {% for i in range(1,37) %}
+      <th scope="col">{{i}}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in range(58) %}
+    <tr>
+      <th scope="row">{{i+1}}</th>
+      {% for j in range(36) %}
+      <td class="{{color[pace_progress[i][j][0]]}}">{{pace_progress[i][j][0]}}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
